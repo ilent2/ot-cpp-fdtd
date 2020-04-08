@@ -17,6 +17,7 @@ is far from complete and has very little documentation.
 The code is part an experiment with template meta programming and
 part a framework for testing different features and implementations
 of FDTD.
+This has several faults including the likely overuse of templates.
 That said, parts of the code could be a useful starting point for
 writing memory efficient FDTD or adding optical force/torque
 calculations to an existing FDTD package.
