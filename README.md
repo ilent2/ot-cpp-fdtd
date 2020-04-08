@@ -2,10 +2,10 @@ ot-cpp-fdtd
 ===========
 
 This package is a prototype for a C++ template library for
-doing optical tweezers simulations using the finite difference
+optical tweezers simulations with the finite difference
 time domain (FDTD) method.
-The code was initially developed as part of an honours year project
-and parts of the code were used to generate the figures in
+The code was initially developed as part of an honours year project.
+Parts of the code were used to generate the figures in
 
 >  Isaac C. D. Lenton, Alexander B. Stilgoe, Halina Rubinsztein-Dunlop
 >  and Timo A. Nieminen., "Visual Guide to Optical Tweezers",
@@ -40,9 +40,11 @@ the simulation should be run, the problem dimensionality and coordinate
 system, and any outputs such as force and torque.
 This is done with a command similar to
 
-  using Simulation = Fdtd::Simulation<Timing, Indices, Coordinates,
-      Permittivity, Permeability, SourceLayer, BoundaryLayers,
-      Initialization, Output>;
+```c++
+using Simulation = Fdtd::Simulation<Timing, Indices, Coordinates,
+    Permittivity, Permeability, SourceLayer, BoundaryLayers,
+    Initialization, Output>;
+```
 
 The only required parts are the `Timing` and `Indices`, but the other
 parts are typically required in order to do useful work.
@@ -54,48 +56,60 @@ In the above example, the parameters are
   * `Timing` a class specifying how time should evolve through
     the simulation.  For example, for linear time steps you could
     use the `Fdtd::Timing::Linear` class
-
-      const unsigned step_count = 50;
-      const double step_size = 1.0e-4;
-      using Timing = Fdtd::Timing::Linear<num_steps, step_size>;
+    
+    ```c++
+    const unsigned step_count = 50;
+    const double step_size = 1.0e-4;
+    using Timing = Fdtd::Timing::Linear<num_steps, step_size>;
+    ```
 
   * `Indices` a class specifying the dimensionality of the problem.
     For most problems this will be a 3-D grid, for example
 
-      const unsigned grid_size = 10;
-      using Indices = Fdtd::Indices::Simple<grid_size, grid_size, grid_size>;
+    ```c++
+    const unsigned grid_size = 10;
+    using Indices = Fdtd::Indices::Simple<grid_size, grid_size, grid_size>;
+    ```
 
   * `Coordinates` specifies the coordinate system to use.  For
     Cartesian coordinate this could be
 
-      const double spacing = 1.0e-6;
-      using Coordinates = Fdtd::Coordinate::Cartesian<
-        spacing, spacing, spacing>;
+    ```c++
+    const double spacing = 1.0e-6;
+    using Coordinates = Fdtd::Coordinate::Cartesian<
+      spacing, spacing, spacing>;
+    ```
 
   * `Permittivity` and `Permeability` specify the material properties.
     These can be homogeneous or inhomogeneous, for example
 
-      using Permittivity = Fdtd::Materials::SimplePermittivity;
-      using Permeability = Fdtd::Materials::HomogeneousPermeability<
-          Vacuum::permeability>;
+    ```c++
+    using Permittivity = Fdtd::Materials::SimplePermittivity;
+    using Permeability = Fdtd::Materials::HomogeneousPermeability<
+        Vacuum::permeability>;
+    ```
 
   * `SourceLayer` can be a source such as a total field scattered field (TFSF)
     source, for example we could use a vector spherical wave function
     beam generated using the optical tweezers toolbox
 
-      using Beam = Fdtd::Sources::ToolboxBeam<nm_file, ab_file, Water::speed,
+    ```c++
+    using Beam = Fdtd::Sources::ToolboxBeam<nm_file, ab_file, Water::speed,
         Fdtd::Offset::Centre, Fdtd::Offset::Location<beam_offset>>;
-      using Source = Fdtd::Sources::ContinuousWave<Beam,
-          Vacuum::angular_frequency>;
-      const unsigned tfsf_depth = 5;
-      using SourceLayer = Fdtd::Tfsf::Simple<Source, tfsf_depth>;
+    using Source = Fdtd::Sources::ContinuousWave<Beam,
+        Vacuum::angular_frequency>;
+    const unsigned tfsf_depth = 5;
+    using SourceLayer = Fdtd::Tfsf::Simple<Source, tfsf_depth>;
+    ```
 
   * `BoundaryLayers` can be any absorbing or perfectly matched
     boundary layer, for example
 
-      const unsigned cpml_depth = 5;
-      using Cpml = Fdtd::Cpml::Simple<cpml_depth, Timing::step_size,
-        Vacuum::permittivity, Vacuum::permeability>;
+    ```c++
+    const unsigned cpml_depth = 5;
+    using Cpml = Fdtd::Cpml::Simple<cpml_depth, Timing::step_size,
+      Vacuum::permittivity, Vacuum::permeability>;
+    ```
 
   * `Initialisation` this class is used to initialise any properties
     such as the permittivity for inhomogenous materials.
@@ -106,18 +120,26 @@ In the above example, the parameters are
     the progress of the simulation.  For example, to write out a
     report of the FDTD setup/progress
 
-      using Output = Fdtd::Output::Report;
+    ```c++
+    using Output = Fdtd::Output::Report;
+    ```
 
 Then it is simply a matter of constructing the `Simulation` class
 and running the simulation.
 For example, a program's main function might look like
 
 ```c++
-    int main(int argc, char** argv) {
-      Simulation sim;
-      sim.evaluate();
-      return 0;
-    }
+int main(int argc, char** argv) {
+  Simulation sim;
+  sim.evaluate();
+  return 0;
+}
+```
+
+Finally, compile the program and run.  For example
+
+```bash
+g++ --std=c++14 main.cpp -o test
 ```
 
 Requirements
@@ -129,8 +151,8 @@ For the example Makefiles you will also need GNU Make.
 How to cite
 -----------
 
-There is not official publication for this software yet,
-however if you would like to cite something you can either
+There is no official publication for this software yet.
+However, if you would like to cite something you can either
 cite this repository
 
 > Isaac C. D. Lenton, "ot-cpp-fdtd"
@@ -191,8 +213,7 @@ Acknowledgement
 The original code was completed by Isaac Lenton as part of
 his honours year project (supervised by Alexander Stilgoe and
 Timo Nieminen).
-This version was released by Isaac Lenton as part of his PhD
-(suppervised by Timo Nieminen, Alexander Stilgoe and
+This pre-release version was made available by Isaac Lenton
+as part of his PhD (suppervised by Timo Nieminen, Alexander Stilgoe and
 Halina Rubinsztein-Dunlop) with the support of the Australian
 Government Research Training Program (RTP) scholarship.
-
