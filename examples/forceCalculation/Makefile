@@ -3,7 +3,7 @@
 FDTD_PATH := ../../include/OtFdtd/
 
 CXX				:= g++
-CXXFLAGS	:= -Wall -O3 --std=c++14 -I$(FDTD_PATH)
+CXXFLAGS	:= -Wall -O3 --std=c++14 -I$(FDTD_PATH) -DNO_OTT
 
 TARGET		:= forceCalc
 

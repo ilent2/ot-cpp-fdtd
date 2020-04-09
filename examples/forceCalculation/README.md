@@ -16,8 +16,9 @@ This example uses the Maxwell stress tensor over a cube containing
 the particle inside the TFSF source layer for the volume and surface
 integral.
 This gives the flux of the total scattered field.
-A second surface outside the TFSF source layer can also be used for
-the TFSF integral to give the flux of the scattered-only field.
+A similar integral on a surface outside the TFSF source layer
+doesn't give the force but does given an estimate for how much
+of the field is scattered or delayed by the object.
 
 The accuracy of the results depends on various simulation parameters
 including resolution and number of integration points.
