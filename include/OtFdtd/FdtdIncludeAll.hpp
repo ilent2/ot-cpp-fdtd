@@ -19,8 +19,11 @@
 #include "Modules/Materials/TimeAverageH.hpp"
 #include "Modules/Materials/TimeAverageE.hpp"
 #include "Modules/Tfsf/Simple.hpp"
+
 #include "Sources/Source.hpp"
 #include "Sources/PlaneWaveBeam.hpp"
+#include "Sources/ToolboxBeam.hpp"
+
 #include "Modules/Cpml/Simple.hpp"
 #include "Modules/Output/Report.hpp"
 #include "Modules/Output/Integrate/Integrate.hpp"
@@ -30,7 +33,10 @@
 #include "Modules/Output/Integrate/Offset.hpp"
 #include "Modules/Output/Integrate/MaxwellStressTensor.hpp"
 #include "Modules/Output/StrideWindow.hpp"
+#include "Modules/Output/WritePlane.hpp"
+#include "Modules/Output/ParameterSelectors.hpp"
 #include "Modules/Output/Progress.hpp"
+
 #include "Common/Materials.hpp"
 #include "Common/Timing.hpp"
 #include "Utilities/MakeEvenOdd.hpp"

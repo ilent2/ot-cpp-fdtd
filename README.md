@@ -52,7 +52,10 @@ parts are typically required in order to do useful work.
 The other layers can be provided in almost any order, as long as
 all the required features for a layer have been provided by
 previous layers.
-In the above example, the parameters are
+In the above example, the parameters would be something like
+the following (note, variables may need additional `static`, `extern`
+or `constexpr` qualifiers depending on context, see examples for more
+details):
 
   * `Timing` a class specifying how time should evolve through
     the simulation.  For example, for linear time steps you could
@@ -147,7 +150,7 @@ Requirements
 ------------
 * C++14 compatible compiler (tested with GNU GCC 7.3.1)
 
-For the example Makefiles you will also need GNU Make.
+For the examples, you may also need GNU Make, Gnuplot or Matlab.
 
 How to cite
 -----------

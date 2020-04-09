@@ -3,6 +3,9 @@
 *.swp
 *.swo
 
+# Matlab swap files
+*.asv
+
 # Prerequisites
 *.d
 
