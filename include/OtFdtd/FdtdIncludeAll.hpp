@@ -22,7 +22,11 @@
 
 #include "Sources/Source.hpp"
 #include "Sources/PlaneWaveBeam.hpp"
+
+// OTT Specific things
+#ifndef NO_OTT
 #include "Sources/ToolboxBeam.hpp"
+#endif
 
 #include "Modules/Cpml/Simple.hpp"
 #include "Modules/Output/Report.hpp"
